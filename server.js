@@ -11,11 +11,19 @@ const io = new Server(httpServer, {
 });
 
 io.on("connection", (socket) => {
-  console.log("socket ::::: connected ::");
+  console.log("------ socket connected ::");
 
-  socket.on("message", (data) => {
+  io.on("message", (data) => {
     console.log("Received message: ", data);
   });
+
+  io.send("Welcome Message From Socket Server.");
+
+  const adminNameSpace = io.of("/admin");
+});
+
+io.on("new_namespace", (namespace) => {
+  console.log("New namespace connected :", namespace);
 });
 
 app.get("/", (req, res) => {
