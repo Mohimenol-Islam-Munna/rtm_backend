@@ -14,8 +14,6 @@ const io = new Server(httpServer, {
   path: `RTM_BACKEND`,
 });
 
-
-
 const messageNamespace = io.of(`/message`);
 const notificationNamespace = io.of(`/notification`);
 const groupNamespace = io.of(`/group`);
