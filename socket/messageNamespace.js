@@ -5,20 +5,20 @@ exports.messageNamespaceHandler = (namespace, io) => {
     // console.log("socket rooms:", socket.rooms);
     // console.log("socket.handshake :", socket.handshake.auth);
 
-    socket.on("join-room", (roomName) => {
-      console.log("room name: ", roomName);
-      namespace.socketsJoin(roomName);
-      // socket.join(roomName);
+    // socket.on("join-room", (roomName) => {
+    //   console.log("room name: ", roomName);
+    //   namespace.socketsJoin(roomName);
+    //   // socket.join(roomName);
 
-      console.log("socket id:", socket.id);
+    //   console.log("socket id:", socket.id);
 
-      socket
-        .to(roomName)
-        .emit(
-          "not_for_all_go",
-          `${socket.id} joined in the ${roomName}  and say hello`
-        );
-    });
+    //   socket
+    //     .to(roomName)
+    //     .emit(
+    //       "not_for_all_go",
+    //       `${socket.id} joined in the ${roomName}  and say hello`
+    //     );
+    // });
 
     // socket.on("not_for_all1", (data) => {
     //   console.log("not_for_all1 received: ", data);
@@ -26,9 +26,11 @@ exports.messageNamespaceHandler = (namespace, io) => {
     // });
 
     // console.log("namespace clients", namespace.sockets.size);
-  });
 
-  namespace.on("disconnect", () => {
-    console.log("Socket disconnected");
+    socket.emit("welcome", "Welcome to message namespace");
+
+    socket.on("disconnect", () => {
+      console.log("Socket disconnected");
+    });
   });
 };
